@@ -95,15 +95,17 @@ function App(): React.JSX.Element {
         handleSearchKeyDown={handleSearchKeyDown}
         profile={profile}
       />
-      <Suspense fallback={<span>Loading...</span>}>
-        <main className="flex z-30 flex-col self-start pb-7 px-[10%] lg:px-[6%] xl:px-[15%] w-full">
+      <main className="flex z-30 flex-col self-start pb-7 px-[10%] lg:px-[6%] xl:px-[15%] w-full">
+        <Suspense fallback={<span>Loading...</span>}>
           <Profile profile={profileToShow}/>
+        </Suspense>
+        <Suspense fallback={<span>Loading...</span>}>
           <Repositories repos={reposToShow} profile={profileToShow} viewAll={viewAll}/>
-          {!viewAll
-            ? <button onClick={() => setViewAll(true)} className="self-center py-5 px-2 my-5">View all repositories</button>
-            : null}
-        </main>
-      </Suspense>
+        </Suspense>
+        {!viewAll
+          ? <button onClick={() => setViewAll(true)} className="self-center py-5 px-2 my-5">View all repositories</button>
+          : null}
+      </main>
     </div>
   )
 }
